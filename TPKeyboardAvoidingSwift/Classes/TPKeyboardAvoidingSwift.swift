@@ -614,7 +614,7 @@ extension UIScrollView
         let priorFrame = self.convert(priorView.frame, to: priorView.superview)
         let candidateFrame = bestCandidate == nil ? CGRect.zero : self.convert(bestCandidate!.frame, to: bestCandidate!.superview)
         
-        var bestCandidateHeuristic = -sqrt(candidateFrame.origin.x*candidateFrame.origin.x + candidateFrame.origin.y*candidateFrame.origin.y) + ( Float(fabs(candidateFrame.minY - priorFrame.minY))<FLT_EPSILON ? 1e6 : 0)
+        var bestCandidateHeuristic = -sqrt(candidateFrame.origin.x*candidateFrame.origin.x + candidateFrame.origin.y*candidateFrame.origin.y) + ( Float(fabs(candidateFrame.minY - priorFrame.minY)) < Float.ulpOfOne ? 1e6 : 0)
         
         for childView in view.subviews
         {
@@ -622,9 +622,9 @@ extension UIScrollView
             {
                 let frame = self.convert(childView.frame, to: view)
                 let heuristic = -sqrt(frame.origin.x*frame.origin.x + frame.origin.y*frame.origin.y)
-                    + (Float(fabs(frame.minY - priorFrame.minY)) < FLT_EPSILON ? 1e6 : 0)
+                    + (Float(fabs(frame.minY - priorFrame.minY)) < Float.ulpOfOne ? 1e6 : 0)
                 
-                if childView != priorView && (Float(fabs(frame.minY - priorFrame.minY)) < FLT_EPSILON
+                if childView != priorView && (Float(fabs(frame.minY - priorFrame.minY)) < Float.ulpOfOne
                     && frame.minX > priorFrame.minX
                     || frame.minY > priorFrame.minY)
                     && (bestCandidate == nil || heuristic > bestCandidateHeuristic)
