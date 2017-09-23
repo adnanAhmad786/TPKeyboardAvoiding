@@ -72,7 +72,7 @@ class TPKeyboardAvoidingTableView:UITableView,UITextFieldDelegate, UITextViewDel
         return self.TPKeyboardAvoiding_focusNextTextField()
     }
     
-    func scrollToActiveTextField()
+    @objc func scrollToActiveTextField()
     {
         return self.TPKeyboardAvoiding_scrollToActiveTextField()
     }
@@ -192,7 +192,7 @@ class TPKeyboardAvoidingCollectionView:UICollectionView,UITextViewDelegate {
         return self.TPKeyboardAvoiding_focusNextTextField()
     }
     
-    func scrollToActiveTextField()
+    @objc func scrollToActiveTextField()
     {
         return self.TPKeyboardAvoiding_scrollToActiveTextField()
     }
@@ -286,7 +286,7 @@ class TPKeyboardAvoidingScrollView:UIScrollView,UITextFieldDelegate,UITextViewDe
         return self.TPKeyboardAvoiding_focusNextTextField()
     }
     
-    func scrollToActiveTextField()
+    @objc func scrollToActiveTextField()
     {
         return self.TPKeyboardAvoiding_scrollToActiveTextField()
     }
@@ -360,7 +360,7 @@ let kMinimumScrollOffsetPadding:CGFloat = 20;
 
 extension UIScrollView
 {
-    func TPKeyboardAvoiding_keyboardWillShow(_ notification:Notification)
+    @objc func TPKeyboardAvoiding_keyboardWillShow(_ notification:Notification)
     {
         guard let userInfo = notification.userInfo else { return }
         guard let rectNotification = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue else
@@ -421,7 +421,7 @@ extension UIScrollView
         }
     }
     
-    func TPKeyboardAvoiding_keyboardWillHide(_ notification:Notification)
+    @objc func TPKeyboardAvoiding_keyboardWillHide(_ notification:Notification)
     {
         guard let userInfo = notification.userInfo else { return }
         
@@ -647,7 +647,7 @@ extension UIScrollView
     }
     
     
-    func TPKeyboardAvoiding_assignTextDelegateForViewsBeneathView(_ obj: AnyObject)
+    @objc func TPKeyboardAvoiding_assignTextDelegateForViewsBeneathView(_ obj: AnyObject)
     {
         func processWithView(_ view: UIView) {
             for childView in view.subviews
